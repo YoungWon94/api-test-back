@@ -1,0 +1,1244 @@
+	key : basePath
+	value : /v1
+
+	key : paths
+		key : /pet
+			key : post
+				key : summary
+				value : Add a new pet to the store
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : addPet
+
+				key : responses
+					key : 405
+						key : description
+						value : Invalid input
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/Pet}, in=body, name=body, description=Pet object that needs to be added to the store, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+				key : consumes
+				values
+				0 : application/json
+				1 : application/xml
+
+
+			key : put
+				key : summary
+				value : Update an existing pet
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : updatePet
+
+				key : responses
+					key : 400
+						key : description
+						value : Invalid ID supplied
+
+
+					key : 404
+						key : description
+						value : Pet not found
+
+
+					key : 405
+						key : description
+						value : Validation exception
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/Pet}, in=body, name=body, description=Pet object that needs to be added to the store, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+				key : consumes
+				values
+				0 : application/json
+				1 : application/xml
+
+
+
+		key : /user/{username}
+			key : get
+				key : summary
+				value : Get user by user name
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : getUserByName
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/User
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid username supplied
+
+
+					key : 404
+						key : description
+						value : User not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=username, description=The name that needs to be fetched. Use user1 for testing. , type=string, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+			key : delete
+				key : summary
+				value : Delete user
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : This can only be done by the logged in user.
+
+				key : operationId
+				value : deleteUser
+
+				key : responses
+					key : 400
+						key : description
+						value : Invalid username supplied
+
+
+					key : 404
+						key : description
+						value : User not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=username, description=The name that needs to be deleted, type=string, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+			key : put
+				key : summary
+				value : Updated user
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : This can only be done by the logged in user.
+
+				key : operationId
+				value : updateUser
+
+				key : responses
+					key : 400
+						key : description
+						value : Invalid user supplied
+
+
+					key : 404
+						key : description
+						value : User not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=username, description=name that need to be deleted, type=string, required=true}
+				1 : {schema={$ref=#/definitions/User}, in=body, name=body, description=Updated user object, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /pet/findByStatus
+			key : get
+				key : summary
+				value : Finds Pets by status
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : Multiple status values can be provided with comma seperated strings
+
+				key : operationId
+				value : findPetsByStatus
+
+				key : responses
+					key : 200
+						key : schema
+							key : type
+							value : array
+
+							key : items
+								key : $ref
+								value : #/definitions/Pet
+
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid status value
+
+
+
+				key : parameters
+				values
+				0 : {in=query, name=status, description=Status values that need to be considered for filter, type=array, items={default=available, type=string, enum=[available, pending, sold]}, collectionFormat=csv, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+
+
+		key : /user/createWithList
+			key : post
+				key : summary
+				value : Creates list of users with given input array
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : createUsersWithListInput
+
+				key : responses
+					key : default
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+				0 : {schema={type=array, items={$ref=#/definitions/User}}, in=body, name=body, description=List of user object, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /pet/{petId}/uploadImage
+			key : post
+				key : summary
+				value : uploads an image
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : uploadFile
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/ApiResponse
+
+
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=petId, format=int64, description=ID of pet to update, type=integer, required=true}
+				1 : {in=formData, name=additionalMetadata, description=Additional data to pass to server, type=string, required=false}
+				2 : {in=formData, name=file, description=file to upload, type=file, required=false}
+
+				key : tags
+				values
+				0 : pet
+
+				key : consumes
+				values
+				0 : multipart/form-data
+
+
+
+		key : /store/inventory
+			key : get
+				key : summary
+				value : Returns pet inventories by status
+
+				key : security
+				values
+				0 : {api_key=[]}
+
+				key : produces
+				values
+				0 : application/json
+
+				key : description
+				value : Returns a map of status codes to quantities
+
+				key : operationId
+				value : getInventory
+
+				key : responses
+					key : 200
+						key : schema
+							key : additionalProperties
+								key : format
+								value : int32
+
+								key : type
+								value : integer
+
+
+							key : type
+							value : object
+
+
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+
+				key : tags
+				values
+				0 : store
+
+
+
+		key : /user/login
+			key : get
+				key : summary
+				value : Logs user into the system
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : loginUser
+
+				key : responses
+					key : 200
+						key : schema
+							key : type
+							value : string
+
+
+						key : headers
+							key : X-Rate-Limit
+								key : format
+								value : int32
+
+								key : description
+								value : calls per hour allowed by the user
+
+								key : type
+								value : integer
+
+
+							key : X-Expires-After
+								key : format
+								value : date-time
+
+								key : description
+								value : date in UTC when toekn expires
+
+								key : type
+								value : string
+
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid username/password supplied
+
+
+
+				key : parameters
+				values
+				0 : {in=query, name=username, description=The user name for login, type=string, required=true}
+				1 : {in=query, name=password, description=The password for login in clear text, type=string, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /user
+			key : post
+				key : summary
+				value : Create user
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : This can only be done by the logged in user.
+
+				key : operationId
+				value : createUser
+
+				key : responses
+					key : default
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/User}, in=body, name=body, description=Created user object, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /user/createWithArray
+			key : post
+				key : summary
+				value : Creates list of users with given input array
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : createUsersWithArrayInput
+
+				key : responses
+					key : default
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+				0 : {schema={type=array, items={$ref=#/definitions/User}}, in=body, name=body, description=List of user object, required=true}
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /pet/findByTags
+			key : get
+				key : summary
+				value : Finds Pets by tags
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
+
+				key : operationId
+				value : findPetsByTags
+
+				key : responses
+					key : 200
+						key : schema
+							key : type
+							value : array
+
+							key : items
+								key : $ref
+								value : #/definitions/Pet
+
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid tag value
+
+
+
+				key : parameters
+				values
+				0 : {in=query, name=tags, description=Tags to filter by, type=array, items={type=string}, collectionFormat=csv, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+
+
+		key : /store/order
+			key : post
+				key : summary
+				value : Place an order for a pet
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : placeOrder
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Order
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid Order
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/Order}, in=body, name=body, description=order placed for purchasing the pet, required=true}
+
+				key : tags
+				values
+				0 : store
+
+
+
+		key : /user/logout
+			key : get
+				key : summary
+				value : Logs out current logged in user session
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : logoutUser
+
+				key : responses
+					key : default
+						key : description
+						value : successful operation
+
+
+
+				key : parameters
+				values
+
+				key : tags
+				values
+				0 : user
+
+
+
+		key : /pet/{petId}
+			key : post
+				key : summary
+				value : Updates a pet in the store with form data
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : updatePetWithForm
+
+				key : responses
+					key : 405
+						key : description
+						value : Invalid input
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=petId, format=int64, description=ID of pet that needs to be updated, type=integer, required=true}
+				1 : {in=formData, name=name, description=Updated name of the pet, type=string, required=false}
+				2 : {in=formData, name=status, description=Updated status of the pet, type=string, required=false}
+
+				key : tags
+				values
+				0 : pet
+
+				key : consumes
+				values
+				0 : application/x-www-form-urlencoded
+
+
+			key : get
+				key : summary
+				value : Find pet by ID
+
+				key : security
+				values
+				0 : {api_key=[]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : Returns a single pet
+
+				key : operationId
+				value : getPetById
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Pet
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid ID supplied
+
+
+					key : 404
+						key : description
+						value : Pet not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=petId, format=int64, description=ID of pet to return, type=integer, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+
+			key : delete
+				key : summary
+				value : Deletes a pet
+
+				key : security
+				values
+				0 : {petstore_auth=[write:pets, read:pets]}
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : 
+
+				key : operationId
+				value : deletePet
+
+				key : responses
+					key : 400
+						key : description
+						value : Invalid pet value
+
+
+
+				key : parameters
+				values
+				0 : {in=header, name=api_key, type=string, required=false}
+				1 : {in=path, name=petId, format=int64, description=Pet id to delete, type=integer, required=true}
+
+				key : tags
+				values
+				0 : pet
+
+
+
+		key : /store/order/{orderId}
+			key : get
+				key : summary
+				value : Find purchase order by ID
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
+
+				key : operationId
+				value : getOrderById
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Order
+
+
+						key : description
+						value : successful operation
+
+
+					key : 400
+						key : description
+						value : Invalid ID supplied
+
+
+					key : 404
+						key : description
+						value : Order not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=orderId, format=int64, description=ID of pet that needs to be fetched, maximum=5, type=integer, minimum=1, required=true}
+
+				key : tags
+				values
+				0 : store
+
+
+			key : delete
+				key : summary
+				value : Delete purchase order by ID
+
+				key : produces
+				values
+				0 : application/xml
+				1 : application/json
+
+				key : description
+				value : For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+
+				key : operationId
+				value : deleteOrder
+
+				key : responses
+					key : 400
+						key : description
+						value : Invalid ID supplied
+
+
+					key : 404
+						key : description
+						value : Order not found
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=orderId, description=ID of the order that needs to be deleted, type=string, minimum=1, required=true}
+
+				key : tags
+				values
+				0 : store
+
+
+
+
+	key : host
+	value : localhost:3000
+
+	key : schemes
+	values
+	0 : http
+
+	key : externalDocs
+		key : description
+		value : Find out more about Swagger
+
+		key : url
+		value : http://swagger.io
+
+
+	key : securityDefinitions
+		key : petstore_auth
+			key : authorizationUrl
+			value : http://petstore.swagger.io/api/oauth/dialog
+
+			key : scopes
+				key : write:pets
+				value : modify pets in your account
+
+				key : read:pets
+				value : read your pets
+
+
+			key : type
+			value : oauth2
+
+			key : flow
+			value : implicit
+
+
+		key : api_key
+			key : in
+			value : header
+
+			key : name
+			value : api_key
+
+			key : type
+			value : apiKey
+
+
+
+	key : definitions
+		key : Order
+			key : xml
+				key : name
+				value : Order
+
+
+			key : type
+			value : object
+
+			key : properties
+				key : petId
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : quantity
+					key : format
+					value : int32
+
+					key : type
+					value : integer
+
+
+				key : id
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : shipDate
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : complete
+					key : default
+					value : false
+
+					key : type
+					value : boolean
+
+
+				key : status
+					key : description
+					value : Order Status
+
+					key : type
+					value : string
+
+					key : enum
+					values
+					0 : placed
+					1 : approved
+					2 : delivered
+
+
+
+
+		key : Category
+			key : xml
+				key : name
+				value : Category
+
+
+			key : type
+			value : object
+
+			key : properties
+				key : name
+					key : type
+					value : string
+
+
+				key : id
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+
+
+		key : User
+			key : xml
+				key : name
+				value : User
+
+
+			key : type
+			value : object
+
+			key : properties
+				key : firstName
+					key : type
+					value : string
+
+
+				key : lastName
+					key : type
+					value : string
+
+
+				key : password
+					key : type
+					value : string
+
+
+				key : userStatus
+					key : format
+					value : int32
+
+					key : description
+					value : User Status
+
+					key : type
+					value : integer
+
+
+				key : phone
+					key : type
+					value : string
+
+
+				key : id
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : email
+					key : type
+					value : string
+
+
+				key : username
+					key : type
+					value : string
+
+
+
+
+		key : Tag
+			key : xml
+				key : name
+				value : Tag
+
+
+			key : type
+			value : object
+
+			key : properties
+				key : name
+					key : type
+					value : string
+
+
+				key : id
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+
+
+		key : ApiResponse
+			key : type
+			value : object
+
+			key : properties
+				key : code
+					key : format
+					value : int32
+
+					key : type
+					value : integer
+
+
+				key : type
+					key : type
+					value : string
+
+
+				key : message
+					key : type
+					value : string
+
+
+
+
+		key : Pet
+			key : xml
+				key : name
+				value : Pet
+
+
+			key : type
+			value : object
+
+			key : required
+			values
+			0 : name
+			1 : photoUrls
+
+			key : properties
+				key : photoUrls
+					key : xml
+						key : name
+						value : photoUrl
+
+						key : wrapped
+						value : true
+
+
+					key : type
+					value : array
+
+					key : items
+						key : type
+						value : string
+
+
+
+				key : name
+					key : type
+					value : string
+
+					key : example
+					value : doggie
+
+
+				key : id
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : category
+					key : $ref
+					value : #/definitions/Category
+
+
+				key : tags
+					key : xml
+						key : name
+						value : tag
+
+						key : wrapped
+						value : true
+
+
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/Tag
+
+
+
+				key : status
+					key : description
+					value : pet status in the store
+
+					key : type
+					value : string
+
+					key : enum
+					values
+					0 : available
+					1 : pending
+					2 : sold
+
+
+
+
+
+	key : swagger
+	value : 2.0
+
+	key : info
+		key : license
+			key : name
+			value : Apache 2.0
+
+			key : url
+			value : http://www.apache.org/licenses/LICENSE-2.0.html
+
+
+		key : contact
+
+		key : description
+		value : 
+
+		key : termsOfService
+		value : 
+
+		key : title
+		value : My Swagger
+
+		key : version
+		value : 1.0.0
+
+
+	key : tags
+	values
+	0 : {name=pet, description=Everything about your Pets, externalDocs={description=Find out more, url=http://swagger.io}}
+	1 : {name=store, description=Access to Petstore orders}
+	2 : {name=user, description=Operations about user, externalDocs={description=Find out more about our store, url=http://swagger.io}}
+
