@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Set;
 import com.example.demo.dao.TestDAO;
 import com.example.demo.dto.TTTT;
 import com.example.demo.dto.TestDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -24,6 +26,7 @@ import org.json.simple.parser.ContainerFactory;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -158,10 +161,10 @@ public class TestController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/addservicecategory", method = RequestMethod.POST)
-    public JSONObject addservice(@RequestBody Map<String, Object> data) throws Exception {
+    @RequestMapping(value = "/swaggerjson", method = RequestMethod.POST)
+    public JSONObject swaggerJson(@RequestBody Map<String, Object> data) throws Exception {
         System.out.println("=====================================================================");
-        System.out.println("서비스 카테고리 추가");
+        System.out.println("swagger json 슬라이스");
         System.out.println(data);
         
         String swaggerUrl = data.get("swaggerUrl").toString();
@@ -234,6 +237,16 @@ public class TestController {
         //************************************************************************ */
       
         return items; //받아온 데이터 통째로 넘김 일단        
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addservice", method = RequestMethod.POST)
+    public Map<String, Object> addService(@RequestBody Map<String, Object> data) {
+        System.out.println("=====================================================================");
+        System.out.println("서비스 카테고리 추가");
+        System.out.println(data);
+
+        return data;
     }
 
     @ResponseBody
@@ -361,5 +374,58 @@ public class TestController {
     // // }
     // return result.get(0);
     // }
+
+
+    @GetMapping("/api1")
+    public Map<String, Object> api1() {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            map = mapper.readValue(new File("./swaggerjson1.json"), Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    @GetMapping("/api2")
+    public Map<String, Object> api2() {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            map = mapper.readValue(new File("./swaggerjson2.json"), Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+
+    @GetMapping("/api3")
+    public Map<String, Object> api3() {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            map = mapper.readValue(new File("./swaggerjson3.json"), Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+    
+    @GetMapping("/employee")
+    public Map<String, Object> employee() {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            map = mapper.readValue(new File("./employee.json"), Map.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
+    }
+
+
 
 }

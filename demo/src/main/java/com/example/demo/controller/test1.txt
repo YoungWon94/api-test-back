@@ -1,239 +1,926 @@
 	key : basePath
-	value : /v1
+	value : /
 
 	key : paths
-		key : /pet
-			key : post
+		key : /user/api/errstatus/{idx}
+			key : patch
 				key : summary
-				value : Add a new pet to the store
-
-				key : security
-				values
-				0 : {petstore_auth=[write:pets, read:pets]}
+				value : API ErrStatus
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : 
+				value : API 에러 상태 'F'
 
 				key : operationId
-				value : addPet
-
-				key : responses
-					key : 405
-						key : description
-						value : Invalid input
-
-
-
-				key : parameters
-				values
-				0 : {schema={$ref=#/definitions/Pet}, in=body, name=body, description=Pet object that needs to be added to the store, required=true}
-
-				key : tags
-				values
-				0 : pet
-
-				key : consumes
-				values
-				0 : application/json
-				1 : application/xml
-
-
-			key : put
-				key : summary
-				value : Update an existing pet
-
-				key : security
-				values
-				0 : {petstore_auth=[write:pets, read:pets]}
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : updatePet
-
-				key : responses
-					key : 400
-						key : description
-						value : Invalid ID supplied
-
-
-					key : 404
-						key : description
-						value : Pet not found
-
-
-					key : 405
-						key : description
-						value : Validation exception
-
-
-
-				key : parameters
-				values
-				0 : {schema={$ref=#/definitions/Pet}, in=body, name=body, description=Pet object that needs to be added to the store, required=true}
-
-				key : tags
-				values
-				0 : pet
-
-				key : consumes
-				values
-				0 : application/json
-				1 : application/xml
-
-
-
-		key : /user/{username}
-			key : get
-				key : summary
-				value : Get user by user name
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : getUserByName
+				value : apiErrStatusUsingPATCH
 
 				key : responses
 					key : 200
 						key : schema
 							key : $ref
-							value : #/definitions/User
+							value : #/definitions/Common
 
 
 						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid username supplied
-
-
-					key : 404
-						key : description
-						value : User not found
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {in=path, name=username, description=The name that needs to be fetched. Use user1 for testing. , type=string, required=true}
+				0 : {in=path, name=idx, format=int64, description=API 번호, type=integer, required=true}
 
 				key : tags
 				values
-				0 : user
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/api/{idx}
+			key : patch
+				key : summary
+				value : API IsDelete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 제거
+
+				key : operationId
+				value : apiIsDeleteUsingPATCH
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=API 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
 
 
 			key : delete
 				key : summary
-				value : Delete user
+				value : API Delete
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : This can only be done by the logged in user.
+				value : API 완전 제거
 
 				key : operationId
-				value : deleteUser
+				value : apiDeleteUsingDELETE
 
 				key : responses
-					key : 400
-						key : description
-						value : Invalid username supplied
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
 
 
-					key : 404
 						key : description
-						value : User not found
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {in=path, name=username, description=The name that needs to be deleted, type=string, required=true}
+				0 : {in=path, name=idx, format=int64, description=API 번호, type=integer, required=true}
 
 				key : tags
 				values
-				0 : user
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apierr/{idx}
+			key : patch
+				key : summary
+				value : API Err Update
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API Err 수정
+
+				key : operationId
+				value : apiErrUpdateUsingPATCH
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=API Err 번호, type=integer, required=true}
+				1 : {schema={$ref=#/definitions/ApiErrDto}, in=body, name=Dto, description=API Err 수정 객체, required=true}
+
+				key : tags
+				values
+				0 : 5. ApiErr
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apit
+			key : post
+				key : summary
+				value : All API Test
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 모든 api 테스트
+
+				key : operationId
+				value : apiTUsingPOST
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/ResponseDto
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ApiDto}, in=body, name=dto, description=API 테스트 객체 PK, required=true}
+
+				key : tags
+				values
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/service
+			key : post
+				key : summary
+				value : Service Create
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 생성
+
+				key : operationId
+				value : serviceCreateUsingPOST
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ServiceDto}, in=body, name=Dto, description=서비스 생성 객체, required=true}
+
+				key : tags
+				values
+				0 : 2. Service
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : get
+				key : summary
+				value : Service List
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 리스트
+
+				key : operationId
+				value : serviceListUsingGET
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_List«ServiceDto»
+
+
+						key : description
+						value : OK
+
+
+
+				key : tags
+				values
+				0 : 2. Service
+
+				key : consumes
+				values
+				0 : application/json
 
 
 			key : put
 				key : summary
-				value : Updated user
+				value : Service Update
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : This can only be done by the logged in user.
+				value : 서비스 수정
 
 				key : operationId
-				value : updateUser
+				value : serviceUpdateUsingPUT
 
 				key : responses
-					key : 400
-						key : description
-						value : Invalid user supplied
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
 
 
-					key : 404
 						key : description
-						value : User not found
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {in=path, name=username, description=name that need to be deleted, type=string, required=true}
-				1 : {schema={$ref=#/definitions/User}, in=body, name=body, description=Updated user object, required=true}
+				0 : {schema={$ref=#/definitions/ServiceDto}, in=body, name=Dto, description=서비스 수정 객체, required=true}
 
 				key : tags
 				values
-				0 : user
+				0 : 2. Service
 
-
-
-		key : /pet/findByStatus
-			key : get
-				key : summary
-				value : Finds Pets by status
-
-				key : security
+				key : consumes
 				values
-				0 : {petstore_auth=[write:pets, read:pets]}
+				0 : application/json
+
+
+
+		key : /admin/category/{idx}
+			key : patch
+				key : summary
+				value : Service Category isDelete
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : Multiple status values can be provided with comma seperated strings
+				value : 서비스 카테고리 isDelete T
 
 				key : operationId
-				value : findPetsByStatus
+				value : categoryIsDeleteAllTUsingPATCH
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 카테고리 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : get
+				key : summary
+				value : Service Category Get
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 카테고리 단건
+
+				key : operationId
+				value : categoryGetUsingGET
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_Single«ServiceCategoryDto»
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 카테고리 단건 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : delete
+				key : summary
+				value : Service Category Delete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 카테고리 완전 제거
+
+				key : operationId
+				value : categoryDeleteUsingDELETE
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 카테고리 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : put
+				key : summary
+				value : Service Category Update
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 카테고리 수정
+
+				key : operationId
+				value : categoryUpdateUsingPUT
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 카테고리 번호, type=integer, required=true}
+				1 : {schema={$ref=#/definitions/ServiceCategoryDto}, in=body, name=Dto, description=서비스 카테고리 수정 객체, required=true}
+
+				key : tags
+				values
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/service/{idx}
+			key : patch
+				key : summary
+				value : Service IsDelete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 제거
+
+				key : operationId
+				value : serviceIsDeleteUsingPATCH
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 2. Service
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : delete
+				key : summary
+				value : Service Delete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : 서비스 완전 제거
+
+				key : operationId
+				value : serviceDeleteUsingDELETE
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=서비스 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 2. Service
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apierr
+			key : get
+				key : summary
+				value : API Err List
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API Err 리스트
+
+				key : operationId
+				value : apiErrListUsingGET
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_List«Map«string,object»»
+
+
+						key : description
+						value : OK
+
+
+
+				key : tags
+				values
+				0 : 5. ApiErr
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apidelay
+			key : get
+				key : summary
+				value : API Delay List
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API Delay 리스트
+
+				key : operationId
+				value : apiDelayListUsingGET
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_List«Map«string,object»»
+
+
+						key : description
+						value : OK
+
+
+
+				key : tags
+				values
+				0 : 6. ApiDelay
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : put
+				key : summary
+				value : API Delay Update
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API Delay 수정
+
+				key : operationId
+				value : apiDelayUpdateUsingPUT
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ApiDelayDto}, in=body, name=Dto, description=API Delay 수정 객체, required=true}
+
+				key : tags
+				values
+				0 : 6. ApiDelay
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apicategory/{idx}
+			key : patch
+				key : summary
+				value : API Category IsDelete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 카테고리 제거
+
+				key : operationId
+				value : apicategoryIsDeleteUsingPATCH
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=API 카테고리 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 3. ApiCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : delete
+				key : summary
+				value : API Category Delete
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 카테고리 완전 제거
+
+				key : operationId
+				value : apicategoryDeleteUsingDELETE
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {in=path, name=idx, format=int64, description=API 카테고리 번호, type=integer, required=true}
+
+				key : tags
+				values
+				0 : 3. ApiCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/api
+			key : post
+				key : summary
+				value : API Create
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 생성
+
+				key : operationId
+				value : apiCreateUsingPOST
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ApiDto}, in=body, name=dto, description=API 생성 객체, required=true}
+
+				key : tags
+				values
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : get
+				key : summary
+				value : API List
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 리스트
+
+				key : operationId
+				value : findByListUsingGET
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_List«Map«string,object»»
+
+
+						key : description
+						value : OK
+
+
+
+				key : tags
+				values
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : put
+				key : summary
+				value : API Update
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 수정
+
+				key : operationId
+				value : apiUpdateUsingPUT
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ApiDto}, in=body, name=Dto, description=API 수정 객체, required=true}
+
+				key : tags
+				values
+				0 : 4. Api
+
+				key : consumes
+				values
+				0 : application/json
+
+
+
+		key : /user/apicategory
+			key : post
+				key : summary
+				value : API Category Create
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 카테고리 생성
+
+				key : operationId
+				value : apicategoryCreateUsingPOST
+
+				key : responses
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/Common
+
+
+						key : description
+						value : OK
+
+
+
+				key : parameters
+				values
+				0 : {schema={$ref=#/definitions/ApiCategoryDto}, in=body, name=dto, description=API 카테고리 생성 객체, required=true}
+
+				key : tags
+				values
+				0 : 3. ApiCategory
+
+				key : consumes
+				values
+				0 : application/json
+
+
+			key : get
+				key : summary
+				value : API Category List
+
+				key : produces
+				values
+				0 : */*
+
+				key : description
+				value : API 카테고리 리스트
+
+				key : operationId
+				value : apicategoryListUsingGET
 
 				key : responses
 					key : 200
@@ -243,859 +930,187 @@
 
 							key : items
 								key : $ref
-								value : #/definitions/Pet
+								value : #/definitions/ApiCategoryDto
 
 
 
 						key : description
-						value : successful operation
+						value : OK
 
 
-					key : 400
-						key : description
-						value : Invalid status value
-
-
-
-				key : parameters
-				values
-				0 : {in=query, name=status, description=Status values that need to be considered for filter, type=array, items={default=available, type=string, enum=[available, pending, sold]}, collectionFormat=csv, required=true}
 
 				key : tags
 				values
-				0 : pet
-
-
-
-		key : /user/createWithList
-			key : post
-				key : summary
-				value : Creates list of users with given input array
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : createUsersWithListInput
-
-				key : responses
-					key : default
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-				0 : {schema={type=array, items={$ref=#/definitions/User}}, in=body, name=body, description=List of user object, required=true}
-
-				key : tags
-				values
-				0 : user
-
-
-
-		key : /pet/{petId}/uploadImage
-			key : post
-				key : summary
-				value : uploads an image
-
-				key : security
-				values
-				0 : {petstore_auth=[write:pets, read:pets]}
-
-				key : produces
-				values
-				0 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : uploadFile
-
-				key : responses
-					key : 200
-						key : schema
-							key : $ref
-							value : #/definitions/ApiResponse
-
-
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-				0 : {in=path, name=petId, format=int64, description=ID of pet to update, type=integer, required=true}
-				1 : {in=formData, name=additionalMetadata, description=Additional data to pass to server, type=string, required=false}
-				2 : {in=formData, name=file, description=file to upload, type=file, required=false}
-
-				key : tags
-				values
-				0 : pet
+				0 : 3. ApiCategory
 
 				key : consumes
 				values
-				0 : multipart/form-data
-
-
-
-		key : /store/inventory
-			key : get
-				key : summary
-				value : Returns pet inventories by status
-
-				key : security
-				values
-				0 : {api_key=[]}
-
-				key : produces
-				values
 				0 : application/json
 
-				key : description
-				value : Returns a map of status codes to quantities
 
-				key : operationId
-				value : getInventory
-
-				key : responses
-					key : 200
-						key : schema
-							key : additionalProperties
-								key : format
-								value : int32
-
-								key : type
-								value : integer
-
-
-							key : type
-							value : object
-
-
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-
-				key : tags
-				values
-				0 : store
-
-
-
-		key : /user/login
-			key : get
+			key : put
 				key : summary
-				value : Logs user into the system
+				value : API Category Update
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : 
+				value : API 카테고리 수정
 
 				key : operationId
-				value : loginUser
-
-				key : responses
-					key : 200
-						key : schema
-							key : type
-							value : string
-
-
-						key : headers
-							key : X-Rate-Limit
-								key : format
-								value : int32
-
-								key : description
-								value : calls per hour allowed by the user
-
-								key : type
-								value : integer
-
-
-							key : X-Expires-After
-								key : format
-								value : date-time
-
-								key : description
-								value : date in UTC when toekn expires
-
-								key : type
-								value : string
-
-
-
-						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid username/password supplied
-
-
-
-				key : parameters
-				values
-				0 : {in=query, name=username, description=The user name for login, type=string, required=true}
-				1 : {in=query, name=password, description=The password for login in clear text, type=string, required=true}
-
-				key : tags
-				values
-				0 : user
-
-
-
-		key : /user
-			key : post
-				key : summary
-				value : Create user
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : This can only be done by the logged in user.
-
-				key : operationId
-				value : createUser
-
-				key : responses
-					key : default
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-				0 : {schema={$ref=#/definitions/User}, in=body, name=body, description=Created user object, required=true}
-
-				key : tags
-				values
-				0 : user
-
-
-
-		key : /user/createWithArray
-			key : post
-				key : summary
-				value : Creates list of users with given input array
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : createUsersWithArrayInput
-
-				key : responses
-					key : default
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-				0 : {schema={type=array, items={$ref=#/definitions/User}}, in=body, name=body, description=List of user object, required=true}
-
-				key : tags
-				values
-				0 : user
-
-
-
-		key : /pet/findByTags
-			key : get
-				key : summary
-				value : Finds Pets by tags
-
-				key : security
-				values
-				0 : {petstore_auth=[write:pets, read:pets]}
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
-
-				key : operationId
-				value : findPetsByTags
-
-				key : responses
-					key : 200
-						key : schema
-							key : type
-							value : array
-
-							key : items
-								key : $ref
-								value : #/definitions/Pet
-
-
-
-						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid tag value
-
-
-
-				key : parameters
-				values
-				0 : {in=query, name=tags, description=Tags to filter by, type=array, items={type=string}, collectionFormat=csv, required=true}
-
-				key : tags
-				values
-				0 : pet
-
-
-
-		key : /store/order
-			key : post
-				key : summary
-				value : Place an order for a pet
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : placeOrder
+				value : apicategoryUpdateUsingPUT
 
 				key : responses
 					key : 200
 						key : schema
 							key : $ref
-							value : #/definitions/Order
+							value : #/definitions/Common
 
 
 						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid Order
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {schema={$ref=#/definitions/Order}, in=body, name=body, description=order placed for purchasing the pet, required=true}
+				0 : {schema={$ref=#/definitions/ApiCategoryDto}, in=body, name=Dto, description=API 카테고리 수정 객체, required=true}
 
 				key : tags
 				values
-				0 : store
-
-
-
-		key : /user/logout
-			key : get
-				key : summary
-				value : Logs out current logged in user session
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : logoutUser
-
-				key : responses
-					key : default
-						key : description
-						value : successful operation
-
-
-
-				key : parameters
-				values
-
-				key : tags
-				values
-				0 : user
-
-
-
-		key : /pet/{petId}
-			key : post
-				key : summary
-				value : Updates a pet in the store with form data
-
-				key : security
-				values
-				0 : {petstore_auth=[write:pets, read:pets]}
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : 
-
-				key : operationId
-				value : updatePetWithForm
-
-				key : responses
-					key : 405
-						key : description
-						value : Invalid input
-
-
-
-				key : parameters
-				values
-				0 : {in=path, name=petId, format=int64, description=ID of pet that needs to be updated, type=integer, required=true}
-				1 : {in=formData, name=name, description=Updated name of the pet, type=string, required=false}
-				2 : {in=formData, name=status, description=Updated status of the pet, type=string, required=false}
-
-				key : tags
-				values
-				0 : pet
+				0 : 3. ApiCategory
 
 				key : consumes
 				values
-				0 : application/x-www-form-urlencoded
+				0 : application/json
 
 
-			key : get
+
+		key : /user/api/delaystatus/{idx}
+			key : patch
 				key : summary
-				value : Find pet by ID
-
-				key : security
-				values
-				0 : {api_key=[]}
+				value : API DelayStatus
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : Returns a single pet
+				value : API 지연 상태 'F'
 
 				key : operationId
-				value : getPetById
+				value : apiDelayStatusUsingPATCH
 
 				key : responses
 					key : 200
 						key : schema
 							key : $ref
-							value : #/definitions/Pet
+							value : #/definitions/Common
 
 
 						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid ID supplied
-
-
-					key : 404
-						key : description
-						value : Pet not found
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {in=path, name=petId, format=int64, description=ID of pet to return, type=integer, required=true}
+				0 : {in=path, name=idx, format=int64, description=API 번호, type=integer, required=true}
 
 				key : tags
 				values
-				0 : pet
+				0 : 4. Api
 
-
-			key : delete
-				key : summary
-				value : Deletes a pet
-
-				key : security
+				key : consumes
 				values
-				0 : {petstore_auth=[write:pets, read:pets]}
+				0 : application/json
+
+
+
+		key : /admin/category
+			key : post
+				key : summary
+				value : Service Category Create
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : 
+				value : 서비스 카테고리 생성
 
 				key : operationId
-				value : deletePet
-
-				key : responses
-					key : 400
-						key : description
-						value : Invalid pet value
-
-
-
-				key : parameters
-				values
-				0 : {in=header, name=api_key, type=string, required=false}
-				1 : {in=path, name=petId, format=int64, description=Pet id to delete, type=integer, required=true}
-
-				key : tags
-				values
-				0 : pet
-
-
-
-		key : /store/order/{orderId}
-			key : get
-				key : summary
-				value : Find purchase order by ID
-
-				key : produces
-				values
-				0 : application/xml
-				1 : application/json
-
-				key : description
-				value : For valid response try integer IDs with value <= 5 or > 10. Other values will generated exceptions
-
-				key : operationId
-				value : getOrderById
+				value : categoryCreateUsingPOST
 
 				key : responses
 					key : 200
 						key : schema
 							key : $ref
-							value : #/definitions/Order
+							value : #/definitions/Common
 
 
 						key : description
-						value : successful operation
-
-
-					key : 400
-						key : description
-						value : Invalid ID supplied
-
-
-					key : 404
-						key : description
-						value : Order not found
+						value : OK
 
 
 
 				key : parameters
 				values
-				0 : {in=path, name=orderId, format=int64, description=ID of pet that needs to be fetched, maximum=5, type=integer, minimum=1, required=true}
+				0 : {schema={$ref=#/definitions/ServiceCategoryDto}, in=body, name=Dto, description=서비스 카테고리 생성 객체, required=true}
 
 				key : tags
 				values
-				0 : store
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
 
 
-			key : delete
+			key : get
 				key : summary
-				value : Delete purchase order by ID
+				value : Service Category List
 
 				key : produces
 				values
-				0 : application/xml
-				1 : application/json
+				0 : */*
 
 				key : description
-				value : For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+				value : 서비스 카테고리 리스트
 
 				key : operationId
-				value : deleteOrder
+				value : categoryListUsingGET
 
 				key : responses
-					key : 400
+					key : 200
+						key : schema
+							key : $ref
+							value : #/definitions/_List«ServiceCategoryDto»
+
+
 						key : description
-						value : Invalid ID supplied
+						value : OK
 
 
-					key : 404
-						key : description
-						value : Order not found
-
-
-
-				key : parameters
-				values
-				0 : {in=path, name=orderId, description=ID of the order that needs to be deleted, type=string, minimum=1, required=true}
 
 				key : tags
 				values
-				0 : store
+				0 : 1. ServiceCategory
+
+				key : consumes
+				values
+				0 : application/json
 
 
 
 
 	key : host
-	value : localhost:3000
-
-	key : schemes
-	values
-	0 : http
-
-	key : externalDocs
-		key : description
-		value : Find out more about Swagger
-
-		key : url
-		value : http://swagger.io
-
-
-	key : securityDefinitions
-		key : petstore_auth
-			key : authorizationUrl
-			value : http://petstore.swagger.io/api/oauth/dialog
-
-			key : scopes
-				key : write:pets
-				value : modify pets in your account
-
-				key : read:pets
-				value : read your pets
-
-
-			key : type
-			value : oauth2
-
-			key : flow
-			value : implicit
-
-
-		key : api_key
-			key : in
-			value : header
-
-			key : name
-			value : api_key
-
-			key : type
-			value : apiKey
-
-
+	value : 15.165.25.145:9500
 
 	key : definitions
-		key : Order
-			key : xml
-				key : name
-				value : Order
-
-
-			key : type
-			value : object
-
-			key : properties
-				key : petId
-					key : format
-					value : int64
-
-					key : type
-					value : integer
-
-
-				key : quantity
-					key : format
-					value : int32
-
-					key : type
-					value : integer
-
-
-				key : id
-					key : format
-					value : int64
-
-					key : type
-					value : integer
-
-
-				key : shipDate
-					key : format
-					value : date-time
-
-					key : type
-					value : string
-
-
-				key : complete
-					key : default
-					value : false
-
-					key : type
-					value : boolean
-
-
-				key : status
-					key : description
-					value : Order Status
-
-					key : type
-					value : string
-
-					key : enum
-					values
-					0 : placed
-					1 : approved
-					2 : delivered
-
-
-
-
-		key : Category
-			key : xml
-				key : name
-				value : Category
-
-
-			key : type
-			value : object
-
-			key : properties
-				key : name
-					key : type
-					value : string
-
-
-				key : id
-					key : format
-					value : int64
-
-					key : type
-					value : integer
-
-
-
-
-		key : User
-			key : xml
-				key : name
-				value : User
-
-
-			key : type
-			value : object
-
-			key : properties
-				key : firstName
-					key : type
-					value : string
-
-
-				key : lastName
-					key : type
-					value : string
-
-
-				key : password
-					key : type
-					value : string
-
-
-				key : userStatus
-					key : format
-					value : int32
-
-					key : description
-					value : User Status
-
-					key : type
-					value : integer
-
-
-				key : phone
-					key : type
-					value : string
-
-
-				key : id
-					key : format
-					value : int64
-
-					key : type
-					value : integer
-
-
-				key : email
-					key : type
-					value : string
-
-
-				key : username
-					key : type
-					value : string
-
-
-
-
-		key : Tag
-			key : xml
-				key : name
-				value : Tag
-
-
-			key : type
-			value : object
-
-			key : properties
-				key : name
-					key : type
-					value : string
-
-
-				key : id
-					key : format
-					value : int64
-
-					key : type
-					value : integer
-
-
-
-
-		key : ApiResponse
+		key : _List«Map«string,object»»
 			key : type
 			value : object
 
@@ -1104,11 +1119,519 @@
 					key : format
 					value : int32
 
+					key : description
+					value : 응답 코드번호 : > 0 정상, < 0 비정상
+
 					key : type
 					value : integer
 
 
+				key : success
+					key : description
+					value : 응답 성공여부 : TRUE/FALSE
+
+					key : type
+					value : boolean
+
+					key : example
+					value : false
+
+
+				key : list
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/Map«string,object»
+
+
+
+				key : message
+					key : description
+					value : 응답 메시지
+
+					key : type
+					value : string
+
+
+
+
+		key : ApiDto
+			key : type
+			value : object
+
+			key : properties
+				key : api_category_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : method
+					key : type
+					value : string
+
+
+				key : api_url
+					key : type
+					value : string
+
+
+				key : insert_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : api_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : description
+					key : type
+					value : string
+
+
+				key : employee_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : response_list
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/Map«string,string»
+
+
+
+				key : is_deleted
+					key : type
+					value : string
+
+
+				key : content_type
+					key : type
+					value : string
+
+
+				key : param
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/Map«string,string»
+
+
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : employee_sub_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : delay_status
+					key : type
+					value : string
+
+
+				key : err_status
+					key : type
+					value : string
+
+
+
+
+		key : _List«ServiceCategoryDto»
+			key : type
+			value : object
+
+			key : properties
+				key : code
+					key : format
+					value : int32
+
+					key : description
+					value : 응답 코드번호 : > 0 정상, < 0 비정상
+
+					key : type
+					value : integer
+
+
+				key : success
+					key : description
+					value : 응답 성공여부 : TRUE/FALSE
+
+					key : type
+					value : boolean
+
+					key : example
+					value : false
+
+
+				key : list
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/ServiceCategoryDto
+
+
+
+				key : message
+					key : description
+					value : 응답 메시지
+
+					key : type
+					value : string
+
+
+
+
+		key : ServiceDto
+			key : type
+			value : object
+
+			key : properties
+				key : is_deleted
+					key : type
+					value : string
+
+
+				key : service_name_kr
+					key : type
+					value : string
+
+
+				key : group_name
+					key : type
+					value : string
+
+
+				key : insert_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : service_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : service_category_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+
+
+		key : _Single«ServiceCategoryDto»
+			key : type
+			value : object
+
+			key : properties
+				key : code
+					key : format
+					value : int32
+
+					key : description
+					value : 응답 코드번호 : > 0 정상, < 0 비정상
+
+					key : type
+					value : integer
+
+
+				key : data
+					key : $ref
+					value : #/definitions/ServiceCategoryDto
+
+
+				key : success
+					key : description
+					value : 응답 성공여부 : TRUE/FALSE
+
+					key : type
+					value : boolean
+
+					key : example
+					value : false
+
+
+				key : message
+					key : description
+					value : 응답 메시지
+
+					key : type
+					value : string
+
+
+
+
+		key : Common
+			key : type
+			value : object
+
+			key : properties
+				key : code
+					key : format
+					value : int32
+
+					key : description
+					value : 응답 코드번호 : > 0 정상, < 0 비정상
+
+					key : type
+					value : integer
+
+
+				key : success
+					key : description
+					value : 응답 성공여부 : TRUE/FALSE
+
+					key : type
+					value : boolean
+
+					key : example
+					value : false
+
+
+				key : message
+					key : description
+					value : 응답 메시지
+
+					key : type
+					value : string
+
+
+
+
+		key : ApiDelayDto
+			key : type
+			value : object
+
+			key : properties
+				key : api_delay_time
+					key : format
+					value : double
+
+					key : type
+					value : number
+
+
+				key : insert_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : api_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : api_delay_code
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : api_delay_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : api_delay_msg
+					key : type
+					value : string
+
+
+
+
+		key : _List«ServiceDto»
+			key : type
+			value : object
+
+			key : properties
+				key : code
+					key : format
+					value : int32
+
+					key : description
+					value : 응답 코드번호 : > 0 정상, < 0 비정상
+
+					key : type
+					value : integer
+
+
+				key : success
+					key : description
+					value : 응답 성공여부 : TRUE/FALSE
+
+					key : type
+					value : boolean
+
+					key : example
+					value : false
+
+
+				key : list
+					key : type
+					value : array
+
+					key : items
+						key : $ref
+						value : #/definitions/ServiceDto
+
+
+
+				key : message
+					key : description
+					value : 응답 메시지
+
+					key : type
+					value : string
+
+
+
+
+		key : Map«string,string»
+			key : additionalProperties
 				key : type
+				value : string
+
+
+			key : type
+			value : object
+
+
+		key : ApiCategoryDto
+			key : type
+			value : object
+
+			key : properties
+				key : api_category_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : is_deleted
+					key : type
+					value : string
+
+
+				key : api_category_name_kr
+					key : type
+					value : string
+
+
+				key : api_category_url
+					key : type
+					value : string
+
+
+				key : insert_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : api_category_state
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : service_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+
+
+		key : ResponseDto
+			key : type
+			value : object
+
+			key : properties
+				key : body
 					key : type
 					value : string
 
@@ -1118,50 +1641,58 @@
 					value : string
 
 
+				key : status
+					key : format
+					value : int32
+
+					key : type
+					value : integer
 
 
-		key : Pet
-			key : xml
-				key : name
-				value : Pet
+
+
+		key : Map«string,object»
+			key : additionalProperties
+				key : type
+				value : object
 
 
 			key : type
 			value : object
 
-			key : required
-			values
-			0 : name
-			1 : photoUrls
+
+		key : ServiceCategoryDto
+			key : type
+			value : object
 
 			key : properties
-				key : photoUrls
-					key : xml
-						key : name
-						value : photoUrl
-
-						key : wrapped
-						value : true
-
-
-					key : type
-					value : array
-
-					key : items
-						key : type
-						value : string
-
-
-
-				key : name
+				key : is_deleted
 					key : type
 					value : string
 
-					key : example
-					value : doggie
+
+				key : category_name_kr
+					key : type
+					value : string
 
 
-				key : id
+				key : insert_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : service_category_no
 					key : format
 					value : int64
 
@@ -1169,41 +1700,61 @@
 					value : integer
 
 
-				key : category
-					key : $ref
-					value : #/definitions/Category
 
 
-				key : tags
-					key : xml
-						key : name
-						value : tag
+		key : ApiErrDto
+			key : type
+			value : object
 
-						key : wrapped
-						value : true
+			key : properties
+				key : api_err_comment
+					key : type
+					value : string
 
+
+				key : api_err_no
+					key : format
+					value : int64
 
 					key : type
-					value : array
-
-					key : items
-						key : $ref
-						value : #/definitions/Tag
+					value : integer
 
 
-
-				key : status
-					key : description
-					value : pet status in the store
+				key : insert_timestamp
+					key : format
+					value : date-time
 
 					key : type
 					value : string
 
-					key : enum
-					values
-					0 : available
-					1 : pending
-					2 : sold
+
+				key : updated_timestamp
+					key : format
+					value : date-time
+
+					key : type
+					value : string
+
+
+				key : api_no
+					key : format
+					value : int64
+
+					key : type
+					value : integer
+
+
+				key : api_err_msg
+					key : type
+					value : string
+
+
+				key : api_err_code
+					key : format
+					value : int64
+
+					key : type
+					value : integer
 
 
 
@@ -1215,30 +1766,28 @@
 	key : info
 		key : license
 			key : name
-			value : Apache 2.0
+			value : React Front
 
 			key : url
-			value : http://www.apache.org/licenses/LICENSE-2.0.html
+			value : http://15.165.25.145:9600
 
-
-		key : contact
 
 		key : description
-		value : 
-
-		key : termsOfService
-		value : 
+		value : API 관리하는 서비스 입니다.
 
 		key : title
-		value : My Swagger
+		value : API Monitoring Service API List
 
 		key : version
-		value : 1.0.0
+		value : 1
 
 
 	key : tags
 	values
-	0 : {name=pet, description=Everything about your Pets, externalDocs={description=Find out more, url=http://swagger.io}}
-	1 : {name=store, description=Access to Petstore orders}
-	2 : {name=user, description=Operations about user, externalDocs={description=Find out more about our store, url=http://swagger.io}}
+	0 : {name=2. Service, description=Service Controller}
+	1 : {name=4. Api, description=Api Controller}
+	2 : {name=1. ServiceCategory, description=Service Category Controller}
+	3 : {name=3. ApiCategory, description=Api Category Controller}
+	4 : {name=6. ApiDelay, description=Api Delay Controller}
+	5 : {name=5. ApiErr, description=Api Err Controller}
 
