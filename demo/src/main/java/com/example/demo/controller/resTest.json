@@ -1,0 +1,184 @@
+{
+  "apicategory": {
+    "insert_timestamp": "2019-11-25T03:59:45.000+0000",
+    "is_deleted": "F",
+    "updated_timestamp": null,
+    "api_category_no": 21,
+    "service_no": 15,
+    "api_category_state": null,
+    "api_category_name_kr": "empEduSchedule"
+  },
+  "service": {
+    "service_state": 0,
+    "insert_timestamp": "2019-11-25T03:50:28.000+0000",
+    "updated_timestamp": null,
+    "is_deleted": "F",
+    "service_no": 15,
+    "group_name": "DBP",
+    "service_url": "http://localhost:8080/education",
+    "service_name_kr": "emplyeeEdu",
+    "service_category_no": 17,
+    "group_no": 3
+  },
+  "apiList": [
+    {
+      "api_category_no": 21,
+      "method": "GET",
+      "api_url": "/schedule",
+      "insert_timestamp": "2019-11-25T04:01:46.000+0000",
+      "api_no": 117,
+      "employee_no": 5,
+      "description": "직원 교육 일정 전체보기",
+      "response_list": [
+        {
+          "resultName": "response200",
+          "resultMsg": "good",
+          "resultCode": "200",
+          "resultData": "200 code"
+        },
+        {
+          "resultName": "response500",
+          "resultMsg": "server err",
+          "resultCode": "500",
+          "resultData": "500 code"
+        }
+      ],
+      "is_deleted": "F",
+      "content_type": "APPLICATION_JSON",
+      "updated_timestamp": null,
+      "param": [],
+      "employee_sub_no": 6,
+      "delay_status": "F",
+      "err_status": "F"
+    },
+    {
+      "api_category_no": 21,
+      "method": "POST",
+      "api_url": "/schedule",
+      "insert_timestamp": "2019-11-25T04:05:36.000+0000",
+      "api_no": 119,
+      "employee_no": 5,
+      "description": "직원 교육 일정 등록",
+      "response_list": [
+        {
+          "resultName": "response200",
+          "resultMsg": "good",
+          "resultCode": "200",
+          "resultData": "200 code"
+        },
+        {
+          "resultName": "response500",
+          "resultMsg": "server err",
+          "resultCode": "500",
+          "resultData": "500 code"
+        }
+      ],
+      "is_deleted": "F",
+      "content_type": "APPLICATION_JSON",
+      "updated_timestamp": null,
+      "param": [
+        {
+          "name": "X-AUTH-TOKEN",
+          "type": "header",
+          "description": "로그인 성공 후 access_token",
+          "required": "true",
+          "datatype": "String"
+        },
+        {
+          "name": "lang",
+          "type": "query",
+          "description": "언어",
+          "required": "true",
+          "datatype": "String"
+        }
+      ],
+      "employee_sub_no": 6,
+      "delay_status": "F",
+      "err_status": "F"
+    },
+    {
+      "api_category_no": 21,
+      "method": "GET",
+      "api_url": "/schedule/{idx}",
+      "insert_timestamp": "2019-11-25T04:02:59.000+0000",
+      "api_no": 118,
+      "employee_no": 5,
+      "description": "직원 교육 일정 조회",
+      "response_list": [
+        {
+          "resultName": "response200",
+          "resultMsg": "good",
+          "resultCode": "200",
+          "resultData": "200 code"
+        },
+        {
+          "resultName": "response500",
+          "resultMsg": "server err",
+          "resultCode": "500",
+          "resultData": "500 code"
+        }
+      ],
+      "is_deleted": "F",
+      "content_type": "APPLICATION_JSON",
+      "updated_timestamp": null,
+      "param": [],
+      "employee_sub_no": 6,
+      "delay_status": "F",
+      "err_status": "F"
+    },
+    {
+      "api_category_no": 21,
+      "method": "DELETE",
+      "api_url": "/schedule/{Idx}",
+      "insert_timestamp": "2019-11-25T04:07:48.000+0000",
+      "api_no": 120,
+      "employee_no": 5,
+      "description": "직원 교육 일정 삭제",
+      "response_list": [
+        {
+          "resultName": "response200",
+          "resultMsg": "good",
+          "resultCode": "200",
+          "resultData": "200 code"
+        },
+        {
+          "resultName": "response500",
+          "resultMsg": "server err",
+          "resultCode": "500",
+          "resultData": "500 code"
+        }
+      ],
+      "is_deleted": "",
+      "content_type": "APPLICATION_JSON",
+      "updated_timestamp": null,
+      "param": [
+        {
+          "name": "X-AUTH-TOKEN",
+          "type": "header",
+          "description": "로그인 성공 후 access_token",
+          "required": "true",
+          "datatype": "String"
+        },
+        {
+          "name": "lang",
+          "type": "query",
+          "description": "언어",
+          "required": "true",
+          "datatype": "String"
+        }
+      ],
+      "employee_sub_no": 6,
+      "delay_status": "",
+      "err_status": ""
+    }, 
+    {
+      "200": {
+        "description": "OK",
+        "schema": { "$ref": "#/definitions/LuluResult" }
+      },
+      "401": { "description": "Unauthorized" },
+      "403": { "description": "Forbidden" },
+      "404": { "description": "Not Found" }
+    }
+  ]
+}

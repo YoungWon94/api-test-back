@@ -1,0 +1,467 @@
+
+{
+  "serviceCategory": "인사", 
+  "groupName": "GroupWare", 
+  "swaggerUrl": "http://localhost:8080/api1", 
+  "swaggerData": { 
+    "swagger": "2.0",
+    "info": {},
+    "tags": [],
+    "host": "...",
+    "basePath": "...",
+    "paths" : {}
+  }
+}
+
+
+{
+    "serviceCategory": "인사",
+    "groupName": "ERP",
+    "swaggerUrl": "http://localhost:8080/api1",
+    "apiCategory": "결재문서 참조문서(t_doc_relation)", //api 카테고리 
+    "apiListInCategory": [ //api카테고리에 포함된 paths
+      {
+        "path": "/docRelation",
+        "method": {
+          "post": {
+            "summary": "결재문서 참조문서 추가",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "insertDocRelationUsingPOST",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "201": { "description": "Created" },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "source_doc_no",
+                "format": "int64",
+                "description": "source_doc_no",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "target_doc_no",
+                "format": "int64",
+                "description": "target_doc_no",
+                "type": "integer",
+                "required": true
+              }
+            ],
+            "tags": ["결재문서 참조문서(t_doc_relation)"],
+            "consumes": ["application/json"]
+          },
+          "get": {
+            "summary": "결재문서 참조문서 조회",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "selectDocRelationUsingGET",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "cno",
+                "format": "int64",
+                "description": "cno",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "docRelationNoList",
+                "description": "1,2,3..",
+                "type": "string",
+                "required": false
+              },
+              {
+                "in": "query",
+                "name": "doc_no",
+                "description": "doc_no",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "tags": ["결재문서 참조문서(t_doc_relation)"],
+            "consumes": ["application/json"]
+          },
+          "delete": {
+            "summary": "결재문서 참조문서 삭제",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "deleteDocRelationUsingDELETE",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "204": { "description": "No Content" },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "cno",
+                "format": "int64",
+                "description": "cno",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "docRelationNoList",
+                "description": "1,2,3..",
+                "type": "string",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "isCompleteDelete",
+                "description": "완전삭제여부(T/F)",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "tags": ["결재문서 참조문서(t_doc_relation)"],
+            "consumes": ["application/json"]
+          },
+          "put": {
+            "summary": "결재문서 참조문서 수정",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "updateDocRelationUsingPUT",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "201": { "description": "Created" },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "doc_relation_no",
+                "format": "int64",
+                "description": "doc_relation_no",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "source_doc_no",
+                "format": "int64",
+                "description": "source_doc_no",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "target_doc_no",
+                "format": "int64",
+                "description": "target_doc_no",
+                "type": "integer",
+                "required": true
+              }
+            ],
+            "tags": ["결재문서 참조문서(t_doc_relation)"],
+            "consumes": ["application/json"]
+          }
+        }
+      },
+      {
+        "path": "/docRelationList",
+        "method": {
+          "post": {
+            "summary": "결재문서 참조문서 추가(List)",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "insertDocRelationListUsingPOST",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "201": { "description": "Created" },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "docRelationList",
+                "description": "[{DocRelation1[{{DocRelation???1},{..}]},{DocRelation12}...]",
+                "type": "string",
+                "required": true
+              }
+            ],
+            "tags": ["결재문서 참조문서(t_doc_relation)"],
+            "consumes": ["application/json"]
+          }
+        }
+      }
+    ],
+    "swaggerData": {
+      "swagger": "2.0",
+      "info": {},
+      "tags": [],
+      "host": "...",
+      "basePath": "..."
+    }
+  }
+  
+
+
+
+/*API 등록*/
+{
+    "serviceCategory": "인사",
+    "groupName": "Cloud",
+    "swaggerUrl": "http://localhost:8080/api1",
+    "apiCategory": "결재문서 히스토리(t_doc_hist)",
+    "apiListInCategory": [
+      {
+        "path": "/docHist/detail",
+        "method": {
+          "get": {
+            "summary": "결재문서 히스토리 상세 조회",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "selectDocHistDetailUsingGET",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "cno",
+                "format": "int64",
+                "description": "cno",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "doc_hist_no",
+                "format": "int64",
+                "description": "doc_hist_no",
+                "type": "integer",
+                "required": true
+              }
+            ],
+            "tags": ["결재문서 히스토리(t_doc_hist)"],
+            "consumes": ["application/json"]
+          }
+        }
+      },
+      {
+        "path": "/docHist",
+        "method": {
+          "get": {
+            "summary": "결재문서 히스토리 조회",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "selectDocHistUsingGET",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" },
+              "404": { "description": "Not Found" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "cno",
+                "format": "int64",
+                "description": "cno",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "doc_no",
+                "format": "int64",
+                "description": "doc_no",
+                "type": "integer",
+                "required": true
+              }
+            ],
+            "tags": ["결재문서 히스토리(t_doc_hist)"],
+            "consumes": ["application/json"]
+          },
+          "delete": {
+            "summary": "결재문서 히스토리 삭제",
+            "produces": ["application/json;charset=UTF-8"],
+            "operationId": "deleteDocHistUsingDELETE",
+            "responses": {
+              "200": {
+                "schema": { "$ref": "#/definitions/LuluResult" },
+                "description": "OK"
+              },
+              "204": { "description": "No Content" },
+              "401": { "description": "Unauthorized" },
+              "403": { "description": "Forbidden" }
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "cno",
+                "format": "int64",
+                "description": "cno",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "doc_no",
+                "format": "int64",
+                "description": "doc_no",
+                "type": "integer",
+                "required": true
+              },
+              {
+                "in": "query",
+                "name": "docHistNoList",
+                "description": "1,2,3..",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "tags": ["결재문서 히스토리(t_doc_hist)"],
+            "consumes": ["application/json"]
+          }
+        }
+      }
+    ],
+    "selectedApiList": [ //선택된 api
+      {
+        "path": "/docHist/detail",
+        "method": "get",
+        "data": {
+          "summary": "결재문서 히스토리 상세 조회",
+          "produces": ["application/json;charset=UTF-8"],
+          "operationId": "selectDocHistDetailUsingGET",
+          "responses": {
+            "200": {
+              "schema": { "$ref": "#/definitions/LuluResult" },
+              "description": "OK"
+            },
+            "401": { "description": "Unauthorized" },
+            "403": { "description": "Forbidden" },
+            "404": { "description": "Not Found" }
+          },
+          "parameters": [
+            {
+              "in": "query",
+              "name": "cno",
+              "format": "int64",
+              "description": "cno",
+              "type": "integer",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "doc_hist_no",
+              "format": "int64",
+              "description": "doc_hist_no",
+              "type": "integer",
+              "required": true
+            }
+          ],
+          "tags": ["결재문서 히스토리(t_doc_hist)"],
+          "consumes": ["application/json"]
+        },
+        "employee": "",
+        "employeeSub": ""
+      },
+      {
+        "path": "/docHist",
+        "method": "delete",
+        "data": {
+          "summary": "결재문서 히스토리 삭제",
+          "produces": ["application/json;charset=UTF-8"],
+          "operationId": "deleteDocHistUsingDELETE",
+          "responses": {
+            "200": {
+              "schema": { "$ref": "#/definitions/LuluResult" },
+              "description": "OK"
+            },
+            "204": { "description": "No Content" },
+            "401": { "description": "Unauthorized" },
+            "403": { "description": "Forbidden" }
+          },
+          "parameters": [
+            {
+              "in": "query",
+              "name": "cno",
+              "format": "int64",
+              "description": "cno",
+              "type": "integer",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "doc_no",
+              "format": "int64",
+              "description": "doc_no",
+              "type": "integer",
+              "required": true
+            },
+            {
+              "in": "query",
+              "name": "docHistNoList",
+              "description": "1,2,3..",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "tags": ["결재문서 히스토리(t_doc_hist)"],
+          "consumes": ["application/json"]
+        },
+        "employee": "",
+        "employeeSub": ""
+      }
+    ],
+    "employee": { 
+      "employee_no": "4",
+      "name": "최영원",
+      "group_no": "3",
+      "group_name": "DBP"
+    },
+    "employeeSub": { 
+      "employee_no": "3",
+      "name": "하정후",
+      "group_no": "2",
+      "group_name": "UI/UX"
+    },
+    "swaggerData": {
+      "swagger": "2.0",
+      "info": {},
+      "tags": [],
+      "host": "...",
+      "basePath": "..."
+    }
+  }
+  
+
